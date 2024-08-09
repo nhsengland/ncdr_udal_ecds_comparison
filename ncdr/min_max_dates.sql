@@ -39,7 +39,8 @@ SELECT
 	min(Der_EC_Arrival_Date_Time) min_Der_EC_Arrival_Date_Time,
 	min(Der_EC_Departure_Date_Time) min_Der_EC_Departure_Date_Time,
 	min(Clinically_Ready_To_Proceed_Timestamp) min_Clinically_Ready_To_Proceed_Timestamp
-into #min_max_dates
+into 
+	#min_max_dates
 FROM
 	[NHSE_SUSPlus_Faster_SUS].[dbo].[tbl_Data_SUS_EC];
 
@@ -49,7 +50,8 @@ SELECT
 	@cols = coalesce(@cols+N',', N'') + quotename(name) 
 FROM 
 	tempdb.sys.columns 
-WHERE object_id = object_id('tempdb..#min_max_dates');
+WHERE 
+	object_id = object_id('tempdb..#min_max_dates');
 
 declare @qry nvarchar(max)  
 select @qry = N'
